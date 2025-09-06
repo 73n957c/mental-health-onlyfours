@@ -14,13 +14,13 @@ interface MusicTrack {
 }
 
 const musicTracks: MusicTrack[] = [
-  { id: 1, title: 'Forest Rain', duration: '10:00', type: 'nature' },
-  { id: 2, title: 'Ocean Waves', duration: '15:30', type: 'nature' },
-  { id: 3, title: 'Mindful Meditation', duration: '20:00', type: 'meditation' },
-  { id: 4, title: 'Deep Focus', duration: '25:00', type: 'ambient' },
-  { id: 5, title: 'Night Sounds', duration: '30:00', type: 'nature' },
-  { id: 6, title: 'Zen Garden', duration: '18:45', type: 'meditation' },
-  { id: 7, title: 'Hello World', duration: '15:00', type: 'nature' },
+  { id: 1, title: 'Forest Rain', duration: '5:00', type: 'nature' },
+  { id: 2, title: 'Ocean Waves', duration: '3:30', type: 'nature' },
+  { id: 3, title: 'Mindful Meditation', duration: '4:00', type: 'meditation' },
+  { id: 4, title: 'Deep Focus', duration: '5:00', type: 'ambient' },
+  { id: 5, title: 'Night Sounds', duration: '6:00', type: 'nature' },
+  { id: 6, title: 'Zen Garden', duration: '4:45', type: 'meditation' },
+  { id: 7, title: 'Hello World', duration: '4:00', type: 'nature' },
 ];
 
 export default function RelaxationScreen() {

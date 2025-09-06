@@ -18,6 +18,7 @@ import DateTimePicker, {
   DateTimePickerEvent,
   DateTimePickerAndroid,
 } from '@react-native-community/datetimepicker';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const { width } = Dimensions.get('window');
 
@@ -48,6 +49,8 @@ const ExpoCalendar: React.FC = () => {
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
+
+  const tabBarHeight = useBottomTabBarHeight();
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -284,10 +287,10 @@ const ExpoCalendar: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: tabBarHeight - 60 }} >
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>✨ My Calendar</Text>
+        <Text style={styles.title}>My Calendar</Text>
         <TouchableOpacity
           style={styles.createButton}
           onPress={() => setEventModalVisible(true)}
@@ -554,13 +557,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 50,
+    paddingTop: 65,
     paddingBottom: 20,
     backgroundColor: '#FEFEFE',
   },
   title: {
-    fontSize: 28,
-    fontWeight: '300',
+    fontSize: 24,
+    fontWeight: '700',
     color: '#2C2C2C',
     letterSpacing: 0.5,
   },
@@ -764,7 +767,7 @@ const styles = StyleSheet.create({
     color: '#8E8E93',
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 15,
   },
   inputLabel: {
     fontSize: 14,

@@ -1,7 +1,7 @@
 import { motivationalQuotes } from '@/constants/Questionnaires';
 import "@/global.css";
 import { useRouter } from 'expo-router';
-import { Activity, BookOpen, Brain, Music, Sparkles, Wind } from 'lucide-react-native';
+import { Activity, BookOpen, Brain, Cat, Music, Sparkles, Wind } from 'lucide-react-native';
 import React from 'react';
 import { SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
@@ -14,7 +14,7 @@ export default function HomeScreen() {
       title: 'Mood Check',
       icon: BookOpen,
       color: '#FFB6C1',
-      route: '/relaxation'
+      route: '/mood'
     },
     {
       title: 'Breathe',
@@ -27,6 +27,12 @@ export default function HomeScreen() {
       icon: Music,
       color: '#DDA0DD',
       route: '/relaxmusic'
+    },
+    {
+      title: 'Pet',
+      icon: Cat,
+      color: '#b4a0ddff',
+      route: '/pet'
     }
   ];
 
@@ -77,14 +83,17 @@ export default function HomeScreen() {
         {/* Quick Actions */}
         <View className="px-6 mb-6">
           <Text className="text-xl font-semibold text-gray-800 mb-4">Quick Actions</Text>
-          <View className="flex-row justify-between gap-3">
+          <View className="flex-row flex-wrap justify-between gap-3">
             {shortcuts.map((shortcut, index) => {
               const IconComponent = shortcut.icon;
               return (
                 <TouchableOpacity
                   key={index}
-                  className="flex-1 items-center py-5 px-4 rounded-2xl shadow-sm"
-                  style={{ backgroundColor: shortcut.color }}
+                  className="items-center py-5 px-4 rounded-2xl shadow-sm"
+                  style={{ 
+                    backgroundColor: shortcut.color,
+                    width: '30%' // Ensures 3 items per row with some margin
+                  }}
                   onPress={() => router.push(shortcut.route as any)}
                 >
                   <IconComponent size={32} color="#FFFFFF" />
@@ -94,7 +103,6 @@ export default function HomeScreen() {
             })}
           </View>
         </View>
-
         <View className="h-5" />
       </ScrollView>
     </SafeAreaView>

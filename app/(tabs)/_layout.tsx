@@ -64,9 +64,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="pet"
+        name="gcalendar"
         options={{
-          title: "Pet",
+          title: "Google Calendar",
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="cat" color={color} />
           ),

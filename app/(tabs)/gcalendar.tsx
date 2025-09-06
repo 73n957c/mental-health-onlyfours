@@ -1,24 +1,22 @@
+import DateTimePicker, {
+  DateTimePickerAndroid,
+  DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
+import * as Calendar from 'expo-calendar';
 import React, { useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  Button,
+  Alert,
+  Dimensions,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
   ScrollView,
   StyleSheet,
-  Alert,
-  Modal,
-  TouchableOpacity,
+  Text,
   TextInput,
-  Platform,
-  KeyboardAvoidingView,
-  Dimensions,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import * as Calendar from 'expo-calendar';
-import DateTimePicker, {
-  DateTimePickerEvent,
-  DateTimePickerAndroid,
-} from '@react-native-community/datetimepicker';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const { width } = Dimensions.get('window');
 
@@ -49,8 +47,6 @@ const ExpoCalendar: React.FC = () => {
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [calendarDays, setCalendarDays] = useState<CalendarDay[]>([]);
-
-  const tabBarHeight = useBottomTabBarHeight();
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -287,7 +283,7 @@ const ExpoCalendar: React.FC = () => {
   };
 
   return (
-    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: tabBarHeight - 60 }} >
+    <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>My Calendar</Text>
@@ -690,6 +686,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8FF',
     marginHorizontal: 20,
     marginTop: 20,
+    marginBottom: 20,
     padding: 20,
     borderRadius: 15,
     shadowColor: '#000',
@@ -754,7 +751,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F8FF',
   },
   selectedCalendar: {
-    backgroundColor: '#E6E6FA',
+    backgroundColor: '#E6E6FA'
   },
   calendarOptionText: {
     fontSize: 16,

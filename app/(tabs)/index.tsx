@@ -9,6 +9,13 @@ export default function HomeScreen() {
   const router = useRouter();
   const todayQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
 
+  const navigateToTest = (testType: 'depression' | 'anxiety') => {
+    router.push({
+      pathname: "/tests/[testType]",
+      params: {testType},
+    });
+  };
+
   const shortcuts = [
     {
       title: 'Mood Check',
@@ -60,7 +67,9 @@ export default function HomeScreen() {
         <View className="px-6 mb-6">
           <Text className="text-xl font-semibold text-gray-800 mb-4">Mental Health Check-in</Text>
           <View className="flex-row gap-3">
-            <TouchableOpacity className="flex-1 p-4 bg-blue-50 rounded-2xl shadow-sm">
+            <TouchableOpacity 
+            onPress={() => navigateToTest('depression')}
+            className="flex-1 p-4 bg-blue-50 rounded-2xl shadow-sm">
               <View className="mb-2">
                 <Brain size={24} color="#4A90E2" />
               </View>
@@ -69,7 +78,9 @@ export default function HomeScreen() {
               <Text className="text-sm font-medium text-gray-700">Current: Mild</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity className="flex-1 p-4 bg-orange-50 rounded-2xl shadow-sm">
+            <TouchableOpacity 
+            onPress={() => navigateToTest('anxiety')}
+            className="flex-1 p-4 bg-orange-50 rounded-2xl shadow-sm">
               <View className="mb-2">
                 <Activity size={24} color="#F5A623" />
               </View>

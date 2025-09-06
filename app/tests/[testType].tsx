@@ -164,7 +164,7 @@ export default function TestScreen() {
           <View className="bg-gray-200 rounded-full h-2">
             <View 
               className="bg-blue-500 h-2 rounded-full"
-              style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+              style={{ width: `${((currentQuestion) / questions.length) * 100}%` }}
             />
           </View>
         </View>

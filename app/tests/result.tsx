@@ -13,33 +13,109 @@ export default function ResultScreen() {
   const router = useRouter();
 
   const testScore = parseInt(score || '0');
-  const maxTestScore = parseInt(maxScore || '15');
+  const maxTestScore = parseInt(maxScore || '27');
   const halfScore = maxTestScore / 2;
-  const needsSupport = testScore >= halfScore;
 
   const getResultMessage = () => {
-    const testName = testType === 'depression' ? 'depression' : 'anxiety';
-    
-    if (needsSupport) {
-      return {
-        title: `Higher ${testName} indicators detected`,
-        message: `Your responses suggest you may be experiencing symptoms of ${testName}. It would be beneficial to speak with a mental health professional who can provide proper assessment and support.`,
-        color: 'text-amber-700',
-        bgColor: 'bg-amber-50',
-        borderColor: 'border-amber-200'
-      };
-    } else {
-      return {
-        title: `Lower ${testName} indicators`,
-        message: `Your responses suggest mild or minimal ${testName} symptoms. Continue monitoring your mental health and practicing self-care. If your feelings change or worsen, don't hesitate to seek support.`,
-        color: 'text-green-700',
-        bgColor: 'bg-green-50',
-        borderColor: 'border-green-200'
-      };
-    }
+    if (testType === 'depression'){
+      if (testScore <= 4){
+        return {
+          title: "None–Minimal Depression",
+          message: "Your responses suggest little to no depression symptoms.",
+          color: "text-green-700",
+          bgColor: "bg-green-50",
+          borderColor: "border-green-200",
+          needsSupport: false,
+        };
+      } else if (testScore <= 9){
+        return {
+          title: "Mild Depression",
+          message: "Mild symptoms detected. Consider self-care and monitoring. Seek help if symptoms worsen.",
+          color: "text-amber-700",
+          bgColor: "bg-amber-50",
+          borderColor: "border-amber-200",
+          needsSupport: false,
+        };
+      } else if (testScore <= 14){
+        return {
+          title: "Moderate Depression",
+          message: "Moderate symptoms detected. Talking with a counselor could be beneficial.",
+          color: "text-amber-700",
+          bgColor: "bg-amber-50",
+          borderColor: "border-amber-200",
+          needsSupport: true,
+        };
+      } else if (testScore <= 19){
+        return {
+          title: "Moderately Severe Depression",
+          message: "Symptoms indicate moderately severe depression. Professional support is highly recommended.",
+          color: "text-red-700",
+          bgColor: "bg-red-50",
+          borderColor: "border-red-200",
+          needsSupport: true,
+        };
+      } else {
+        return {
+          title: "Severe Depression",
+          message: "Your score indicates severe depression symptoms. Please seek immediate professional help.",
+          color: "text-red-700",
+          bgColor: "bg-red-50",
+          borderColor: "border-red-200",
+          needsSupport: true,
+        };
+      }
+    }else if (testType === 'anxiety') {
+      if (testScore <= 4){
+        return {
+          title: "Minimal Anxiety",
+          message: "Your responses suggest minimal anxiety symptoms.",
+          color: "text-green-700",
+          bgColor: "bg-green-50",
+          borderColor: "border-green-200",
+          needsSupport: false,
+        };
+      } else if (testScore <= 9) {
+        return {
+          title: "Mild Anxiety",
+          message: "Mild symptoms detected. Talking with a counselor may be helpful.",
+          color: "text-amber-700",
+          bgColor: "bg-amber-50",
+          borderColor: "border-amber-200",
+          needsSupport: true,
+        };
+      } else if (testScore <= 14){
+        return {
+          title: "Moderate Anxiety",
+          message: "Symptoms indicate moderate anxiety. Professional support is recommended.",
+          color: "text-amber-700",
+          bgColor: "bg-amber-50",
+          borderColor: "border-amber-200",
+          needsSupport: true,
+        };
+      } else {
+        return {
+          title: "Severe Anxiety",
+          message: "Your score indicates severe anxiety. Please seek professional help as soon as possible.",
+          color: "text-red-700",
+          bgColor: "bg-red-50",
+          borderColor: "border-red-200",
+          needsSupport: true,
+        };
+      }
+    } 
+    //fallback
+    return {
+      title: "Unknown Test",
+      message: "Could not determine result.",
+      color: "text-gray-700",
+      bgColor: "bg-gray-50",
+      borderColor: "border-gray-200",
+      needsSupport: false,
+    };
   };
 
   const resultInfo = getResultMessage();
+  const needsSupport = resultInfo.needsSupport;
 
   return (
     <SafeAreaView className="flex-1 bg-gray-50">

@@ -7,7 +7,7 @@ import { ArrowLeft, CircleCheck as CheckCircle } from 'lucide-react-native';
 const depressionQuestions = [
   {
     id: 1,
-    question: "Over the past two weeks, how often have you felt down, depressed, or hopeless?",
+    question: "Little interest or pleasure in doing things?",
     options: [
       { text: "Not at all", score: 0 },
       { text: "Several days", score: 1 },
@@ -17,7 +17,7 @@ const depressionQuestions = [
   },
   {
     id: 2,
-    question: "Little interest or pleasure in doing things?",
+    question: "Feeling down, depressed, or hopeless?",
     options: [
       { text: "Not at all", score: 0 },
       { text: "Several days", score: 1 },
@@ -54,7 +54,47 @@ const depressionQuestions = [
       { text: "More than half the days", score: 2 },
       { text: "Nearly every day", score: 3 }
     ]
-  }
+  },
+  {
+    id: 6,
+    question: "Feeling bad about yourself — or that you are a failure or have let yourself or your family down?",
+    options: [
+      { text: "Not at all", score: 0 },
+      { text: "Several days", score: 1 },
+      { text: "More than half the days", score: 2 },
+      { text: "Nearly every day", score: 3 }
+    ]
+  },
+  {
+    id: 7,
+    question: "Trouble concentrating on things, such as reading the newspaper or watching television?",
+    options: [
+      { text: "Not at all", score: 0 },
+      { text: "Several days", score: 1 },
+      { text: "More than half the days", score: 2 },
+      { text: "Nearly every day", score: 3 }
+    ]
+  },
+  {
+    id: 8,
+    question: "Moving or speaking so slowly that other people could have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual?",
+    options: [
+      { text: "Not at all", score: 0 },
+      { text: "Several days", score: 1 },
+      { text: "More than half the days", score: 2 },
+      { text: "Nearly every day", score: 3 }
+    ]
+  },
+  {
+    id: 9,
+    question: "Thoughts that you would be better off dead or of hurting yourself in some way?",
+    options: [
+      { text: "Not at all", score: 0 },
+      { text: "Several days", score: 1 },
+      { text: "More than half the days", score: 2 },
+      { text: "Nearly every day", score: 3 }
+    ]
+  },
 ];
 
 const anxietyQuestions = [
@@ -107,7 +147,27 @@ const anxietyQuestions = [
       { text: "More than half the days", score: 2 },
       { text: "Nearly every day", score: 3 }
     ]
-  }
+  },
+  {
+    id: 6,
+    question: "Becoming easily annoyed or irritable?",
+    options: [
+      { text: "Not at all", score: 0 },
+      { text: "Several days", score: 1 },
+      { text: "More than half the days", score: 2 },
+      { text: "Nearly every day", score: 3 }
+    ]
+  },
+  {
+    id: 7,
+    question: "Feeling afraid as if something awful might happen?",
+    options: [
+      { text: "Not at all", score: 0 },
+      { text: "Several days", score: 1 },
+      { text: "More than half the days", score: 2 },
+      { text: "Nearly every day", score: 3 }
+    ]
+  },
 ];
 
 export default function TestScreen() {

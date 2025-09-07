@@ -75,6 +75,9 @@ In the output, you'll find options to open the app in a
 
 #### Future Improvements
 - Implement backend with Node.js + MongoDB for secure data storage.
-- Enable AI-driven personalization (e.g., recommendations based on mood diary).
+- Enable AI-driven personalization with features like smart recommendations and pet chat.
+- Make the virtual pet more interactive and lively to boost user engagement.
+- Introduce a virtual currency system to buy pet food and items, enhancing gamification.
+- Implement a fully workable notification system integrated with the Smart Calendar.
 - Expand counseling services via partnerships with universities.
 - Add localization support for multiple languages.

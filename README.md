@@ -12,7 +12,7 @@ Key **pain points** identified:
 
 ### 📱Application Name
 **MINDOASIS**
-A mobile application that complements existing support systems by promoting self-care, providing proactive stress management tools, accessible mental health support and integrating seamlessly into students’ daily routines
+- A mobile application that complements existing support systems by promoting self-care, providing proactive stress management tools, accessible mental health support and integrating seamlessly into students’ daily routines
 
 ---
 

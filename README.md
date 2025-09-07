@@ -12,6 +12,11 @@ This project aims to **complement existing support systems** with a mobile app t
 
 ---
 
+### 📱Application Name
+#### **MINDOASIS**
+
+---
+
 ### 🚀 Features  
 
 | Feature | Description |

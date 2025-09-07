@@ -8,12 +8,11 @@ Key **pain points** identified:
 - Fear of stigma, shame, and privacy concerns when seeking help.  
 - Lack of personalized, proactive tools to manage stress and academic pressure.  
 
-This project aims to **complement existing support systems** with a mobile app that provides self-care tools, proactive stress management, and accessible mental health support.  
-
 ---
 
 ### 📱Application Name
-#### **MINDOASIS**
+**MINDOASIS**
+A mobile application that complements existing support systems by promoting self-care, providing proactive stress management tools, accessible mental health support and integrating seamlessly into students’ daily routines
 
 ---
 

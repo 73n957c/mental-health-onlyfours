@@ -3,8 +3,7 @@ import { Linking, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, 
 
 // --- Mock Data ---
 const emergencySupport = {
-  crisisHotline: '988',
-  emergency: '911',
+  emergency: '999',
 };
 
 const universityServices = [
@@ -85,9 +84,6 @@ const App = () => {
             If you're having thoughts of self-harm or suicide, please reach out immediately.
           </Text>
           <View style={styles.emergencyButtonsContainer}>
-            <TouchableOpacity onPress={() => makePhoneCall(emergencySupport.crisisHotline)} style={[styles.emergencyButton, { backgroundColor: '#c75151' }]}>
-              <Text style={styles.emergencyButtonText}>Crisis Hotline: {emergencySupport.crisisHotline}</Text>
-            </TouchableOpacity>
             <TouchableOpacity onPress={() => makePhoneCall(emergencySupport.emergency)} style={[styles.emergencyButton, { backgroundColor: '#c75151' }]}>
               <Text style={styles.emergencyButtonText}>Emergency: {emergencySupport.emergency}</Text>
             </TouchableOpacity>

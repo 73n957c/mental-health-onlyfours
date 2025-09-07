@@ -17,7 +17,7 @@ import {
   saveIntervalDuration,
 } from "@/constants/Pet";
 import { useAppState } from "@react-native-community/hooks";
-import { Cat, Fish, Hand } from "lucide-react-native";
+import { Cat, Fish, Hand, Speech } from "lucide-react-native";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
   Alert,
@@ -241,11 +241,11 @@ export default function Pet() {
             <View style={style.petActionsGrid}>
               <TouchableOpacity style={style.petActionButton} onPress={feed}>
                 <Fish></Fish>
-                <Text>Feed</Text>
+                <Text style={style.petActionButtonText}>Feed</Text>
               </TouchableOpacity>
               <TouchableOpacity style={style.petActionButton} onPress={pet}>
                 <Hand></Hand>
-                <Text>Pet</Text>
+                <Text style={style.petActionButtonText}>Pet</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -267,6 +267,13 @@ export default function Pet() {
               <Text style={style.statLabel}>Can count</Text>
             </View>
           </View>
+        </View>
+
+        <View style={style.section}>
+          <TouchableOpacity style={style.talkToPetButton}>
+            <Speech />
+            <Text style={style.talkToPetButtonText}>Talk to your pet</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={style.section}>
@@ -346,12 +353,17 @@ const style = StyleSheet.create({
   },
   petActionButton: {
     flex: 1,
-    backgroundColor: "#F4C2C2",
+    backgroundColor: "#8B5CF6",
     borderRadius: 12,
+    color: "#FFFFFF",
     padding: 16,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    gap: 10,
+  },
+  petActionButtonText: {
+    color: "#FFFFFF",
   },
   statsGrid: {
     flexDirection: "row",
@@ -379,6 +391,22 @@ const style = StyleSheet.create({
     fontSize: 12,
     color: "#6B7280",
     textAlign: "center",
+  },
+  talkToPetButton: {
+    fontSize: 15,
+    fontWeight: "600",
+    backgroundColor: "#8B5CF6",
+    borderRadius: 12,
+    color: "#FFFFFF",
+    width: "100%",
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+  talkToPetButtonText: {
+    color: "#FFFFFF",
   },
   section: {
     marginBottom: 24,

@@ -54,7 +54,7 @@ In the output, you'll find options to open the app in a
 - [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-⚠️ Note: It is recommended to install Expo Go on your mobile device and connect by scanning the QR code shown in the terminal after running `npx expo start`, for the best experience. You will need to wait for a few seconds for the app to build in Expo Go.
+⚠️ Note: It is recommended to install Expo Go on your mobile device and connect by scanning the QR code shown in the terminal after running `npx expo start`, for the easiest and the best experience. You will need to wait for a few seconds for the app to build in Expo Go.
 
 ---
 

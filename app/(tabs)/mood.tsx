@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar } from 'react-native-calendars';
-import { ViewStyle, TextStyle } from 'react-native';
-import { Plus, X } from 'lucide-react-native';
-import Modal from 'react-native-modal';
-import { StorageUtils, MoodEntry } from '@/components/MoodProvider';
+import { MoodEntry, StorageUtils } from "@/components/MoodProvider";
+import { Plus, X } from "lucide-react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  ScrollView,
+  Text,
+  TextInput,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
+import { Calendar } from "react-native-calendars";
+import Modal from "react-native-modal";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const moodEmojis = [
-  { emoji: '😊', mood: 'happy', color: '#10b981' },
-  { emoji: '😌', mood: 'calm', color: '#06b6d4' },
-  { emoji: '😐', mood: 'neutral', color: '#6b7280' },
-  { emoji: '😰', mood: 'stressed', color: '#f59e0b' },
-  { emoji: '😢', mood: 'sad', color: '#ef4444' },
-  { emoji: '😟', mood: 'anxious', color: '#8b5cf6' },
+  { emoji: "😊", mood: "happy", color: "#10b981" },
+  { emoji: "😌", mood: "calm", color: "#06b6d4" },
+  { emoji: "😐", mood: "neutral", color: "#6b7280" },
+  { emoji: "😰", mood: "stressed", color: "#f59e0b" },
+  { emoji: "😢", mood: "sad", color: "#ef4444" },
+  { emoji: "😟", mood: "anxious", color: "#8b5cf6" },
 ];
 
 type CustomMarkedDates = {
@@ -25,12 +33,11 @@ type CustomMarkedDates = {
   };
 };
 
-
 export default function MoodScreen() {
   const [moodEntries, setMoodEntries] = useState<MoodEntry[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedMood, setSelectedMood] = useState<string>('');
-  const [moodNote, setMoodNote] = useState('');
+  const [selectedMood, setSelectedMood] = useState<string>("");
+  const [moodNote, setMoodNote] = useState("");
   const [markedDates, setMarkedDates] = useState<CustomMarkedDates>({});
 
   useEffect(() => {
@@ -41,21 +48,21 @@ export default function MoodScreen() {
     const entries = await StorageUtils.getMoodEntries();
     // Sort by timestamp so last one per date wins
     const sorted = [...entries].sort((a, b) => a.timestamp - b.timestamp);
-    
+
     // Build markedDates
     const marked: CustomMarkedDates = {};
-    entries.forEach(entry => {
-      const moodData = moodEmojis.find(m => m.mood === entry.mood);
+    entries.forEach((entry) => {
+      const moodData = moodEmojis.find((m) => m.mood === entry.mood);
       marked[entry.date] = {
         customStyles: {
           container: {
-            backgroundColor: '#f9fafb',
+            backgroundColor: "#f9fafb",
             borderRadius: 15,
           },
           text: {
-            textAlign: 'center',
+            textAlign: "center",
             fontSize: 22,
-            text: moodData?.emoji ?? '🙂',
+            text: moodData?.emoji ?? "🙂",
           } as any,
         },
       };
@@ -66,26 +73,26 @@ export default function MoodScreen() {
 
   const saveMoodEntry = async () => {
     if (!selectedMood) {
-      Alert.alert('Please select a mood');
+      Alert.alert("Please select a mood");
       return;
     }
 
-    const today = new Date().toISOString().split('T')[0];
-    const moodData = moodEmojis.find(m => m.mood === selectedMood);
-    
+    const today = new Date().toISOString().split("T")[0];
+    const moodData = moodEmojis.find((m) => m.mood === selectedMood);
+
     const entry: MoodEntry = {
       id: Date.now().toString(),
       date: today,
-      emoji: moodData?.emoji || '😐',
+      emoji: moodData?.emoji || "😐",
       mood: selectedMood,
       note: moodNote,
       timestamp: Date.now(),
     };
 
     await StorageUtils.saveMoodEntry(entry);
-    
-    setMoodNote('');
-    setSelectedMood('');
+
+    setMoodNote("");
+    setSelectedMood("");
     setShowModal(false);
     loadMoodEntries();
   };
@@ -105,60 +112,84 @@ export default function MoodScreen() {
             markedDates={markedDates}
             style={{ height: 410 }}
             theme={{
-              backgroundColor: '#ffffff',
-              calendarBackground: '#ffffff',
-              textSectionTitleColor: '#374151',
-              selectedDayBackgroundColor: '#14b8a6',
-              selectedDayTextColor: '#ffffff',
-              todayTextColor: '#14b8a6',
-              dayTextColor: '#374151',
-              textDisabledColor: '#d1d5db',
-              monthTextColor: '#374151',
-              arrowColor: '#14b8a6',
-              textDayFontWeight: '500',
-              textMonthFontWeight: '700',
-              textDayHeaderFontWeight: '600',
+              backgroundColor: "#ffffff",
+              calendarBackground: "#ffffff",
+              textSectionTitleColor: "#374151",
+              selectedDayBackgroundColor: "#14b8a6",
+              selectedDayTextColor: "#ffffff",
+              todayTextColor: "#14b8a6",
+              dayTextColor: "#374151",
+              textDisabledColor: "#d1d5db",
+              monthTextColor: "#374151",
+              arrowColor: "#14b8a6",
+              textDayFontWeight: "500",
+              textMonthFontWeight: "700",
+              textDayHeaderFontWeight: "600",
               textMonthFontSize: 20,
             }}
             dayComponent={({ date, state, marking }) => {
-                const emoji = (marking as any)?.customStyles?.text?.text;
-                return (
-                    <View style={{ width: 50, height: 50, alignItems: 'center', justifyContent: 'center' }}>
-                        {date && (
-                            <Text style={{ fontSize: 14, color: state === 'disabled' ? '#d1d5db' : '#374151' }}>
-                                {date.day}
-                            </Text>
-                        )}
-                        {emoji && (
-                            <Text style={{ fontSize: 18, marginTop: 2 }}>
-                                {emoji}
-                            </Text>
-                        )}
-                    </View>
-                );
+              const emoji = (marking as any)?.customStyles?.text?.text;
+              return (
+                <View
+                  style={{
+                    width: 50,
+                    height: 50,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {date && (
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: state === "disabled" ? "#d1d5db" : "#374151",
+                      }}
+                    >
+                      {date.day}
+                    </Text>
+                  )}
+                  {emoji && (
+                    <Text style={{ fontSize: 18, marginTop: 2 }}>{emoji}</Text>
+                  )}
+                </View>
+              );
             }}
           />
         </View>
 
         {/* Recent Entries */}
         <View className="mx-6 mt-6 mb-8">
-          <Text className="text-xl font-bold text-gray-800 mb-4">Recent Entries</Text>
-          {moodEntries.slice(-5).reverse().map((entry) => (
-            <View key={entry.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-3">
-              <View className="flex-row items-center justify-between mb-2">
-                <View className="flex-row items-center">
-                  <Text className="text-2xl mr-3">{entry.emoji}</Text>
-                  <View>
-                    <Text className="font-semibold text-gray-800 capitalize">{entry.mood}</Text>
-                    <Text className="text-sm text-gray-500">{new Date(entry.timestamp).toLocaleDateString()}</Text>
+          <Text className="text-xl font-bold text-gray-800 mb-4">
+            Recent Entries
+          </Text>
+          {moodEntries
+            .slice(-5)
+            .reverse()
+            .map((entry) => (
+              <View
+                key={entry.id}
+                className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-3"
+              >
+                <View className="flex-row items-center justify-between mb-2">
+                  <View className="flex-row items-center">
+                    <Text className="text-2xl mr-3">{entry.emoji}</Text>
+                    <View>
+                      <Text className="font-semibold text-gray-800 capitalize">
+                        {entry.mood}
+                      </Text>
+                      <Text className="text-sm text-gray-500">
+                        {new Date(entry.timestamp).toLocaleDateString()}
+                      </Text>
+                    </View>
                   </View>
                 </View>
+                {entry.note && (
+                  <Text className="text-gray-600 mt-2 italic">
+                    "{entry.note}"
+                  </Text>
+                )}
               </View>
-              {entry.note && (
-                <Text className="text-gray-600 mt-2 italic">"{entry.note}"</Text>
-              )}
-            </View>
-          ))}
+            ))}
         </View>
       </ScrollView>
 
@@ -176,9 +207,11 @@ export default function MoodScreen() {
         onBackdropPress={() => setShowModal(false)}
         className="justify-end m-0"
       >
-        <View className="bg-white rounded-t-3xl p-6">
+        <View className="bg-white rounded-3xl p-6">
           <View className="flex-row justify-between items-center mb-6">
-            <Text className="text-xl font-bold text-gray-800">How are you feeling today?</Text>
+            <Text className="text-xl font-bold text-gray-800">
+              How are you feeling today?
+            </Text>
             <TouchableOpacity onPress={() => setShowModal(false)}>
               <X size={24} color="#6b7280" />
             </TouchableOpacity>
@@ -187,24 +220,27 @@ export default function MoodScreen() {
           {/* Mood Selection */}
           <View className="flex-row flex-wrap justify-between mb-6">
             {moodEmojis.map((mood) => {
-                const isSelected = selectedMood === mood.mood;
-                return (
-                    <TouchableOpacity
-                        key={mood.mood}
-                        onPress={() => setSelectedMood(mood.mood)}
-                        className={`w-[30%] p-4 rounded-2xl border-2 items-center mb-3 ${
-                            isSelected ? 'border-green-600 bg-green-50' : 'border-gray-200 bg-gray-50'
-                        }`}
-                    >
-                        <Text className="text-3xl mb-2">{mood.emoji}</Text>
-                        <Text 
-                            className={`font-medium capitalize ${
-                                isSelected ? 'text-green-700' : 'text-gray-700'
-                            }`}>
-                            {mood.mood}
-                        </Text>
-                    </TouchableOpacity>
-                );
+              const isSelected = selectedMood === mood.mood;
+              return (
+                <TouchableOpacity
+                  key={mood.mood}
+                  onPress={() => setSelectedMood(mood.mood)}
+                  className={`w-[30%] p-4 rounded-2xl border-2 items-center mb-3 ${
+                    isSelected
+                      ? "border-green-600 bg-green-50"
+                      : "border-gray-200 bg-gray-50"
+                  }`}
+                >
+                  <Text className="text-3xl mb-2">{mood.emoji}</Text>
+                  <Text
+                    className={`font-medium capitalize ${
+                      isSelected ? "text-green-700" : "text-gray-700"
+                    }`}
+                  >
+                    {mood.mood}
+                  </Text>
+                </TouchableOpacity>
+              );
             })}
           </View>
 
@@ -216,7 +252,7 @@ export default function MoodScreen() {
             multiline
             numberOfLines={3}
             className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-6 text-gray-800"
-            style={{ textAlignVertical: 'top' }}
+            style={{ textAlignVertical: "top" }}
           />
 
           {/* Save Button */}
@@ -224,7 +260,9 @@ export default function MoodScreen() {
             onPress={saveMoodEntry}
             className="bg-primary-500 p-4 rounded-xl items-center"
           >
-            <Text className="text-white font-semibold text-lg">Save Entry</Text>
+            <Text className="text-gray-800 font-semibold text-lg">
+              Save Entry
+            </Text>
           </TouchableOpacity>
         </View>
       </Modal>

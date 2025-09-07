@@ -17,6 +17,7 @@ import {
   saveIntervalDuration,
 } from "@/constants/Pet";
 import { useAppState } from "@react-native-community/hooks";
+import { useRouter } from "expo-router";
 import { Cat, Fish, Hand, Speech } from "lucide-react-native";
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import {
@@ -56,6 +57,7 @@ function pickRandom<ElementType>(p_array: Array<ElementType>) {
 }
 
 export default function Pet() {
+  const router = useRouter();
   const appState = useAppState();
   const [cleanUpData, setCleanUpData] = useState<CleanUpData | null>(null);
   const [decrementTick, setDecrementTick] = useState<number | null>(null);
@@ -270,7 +272,12 @@ export default function Pet() {
         </View>
 
         <View style={style.section}>
-          <TouchableOpacity style={style.talkToPetButton}>
+          <TouchableOpacity
+            style={style.talkToPetButton}
+            onPress={() => {
+              router.push("/petspeech");
+            }}
+          >
             <Speech />
             <Text style={style.talkToPetButtonText}>Talk to your pet</Text>
           </TouchableOpacity>
